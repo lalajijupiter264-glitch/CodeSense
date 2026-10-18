@@ -14,12 +14,8 @@ const getApiBaseUrl = (): string => {
   if (envUrl && envUrl.trim() !== '') {
     return envUrl.trim().replace(/\/$/, '');
   }
-  // In production deployment (e.g. Vercel), connect to the live Render backend
-  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-    return 'https://codesense-api-5618.onrender.com';
-  }
-  // Default local development server fallback
-  return 'http://127.0.0.1:8001';
+  // Default to live OpenJDK Render backend
+  return 'https://codesense-api-5618.onrender.com';
 };
 
 const API_BASE_URL = getApiBaseUrl();
