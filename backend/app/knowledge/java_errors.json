@@ -1,0 +1,215 @@
+{
+  "DIVISION_BY_ZERO": {
+    "code": "DIVISION_BY_ZERO",
+    "category": "ARITHMETIC_ERROR",
+    "title": "Division by Zero",
+    "beginner_explanation": "The code attempts to divide an integer by zero.",
+    "why_it_happened": "Java does not allow integer division by zero. The compiler detects this invalid constant expression.",
+    "common_causes": [
+      "Dividing an integer literal directly by 0 (e.g. 10 / 0)",
+      "Evaluating a constant expression where the denominator is 0",
+      "Using modulo by zero (e.g. 10 % 0)"
+    ],
+    "example_broken": "int s = 10 / 0;",
+    "example_fixed": "int s = 10 / 2;",
+    "suggested_fix": "Use a non-zero divisor, or validate the divisor before dividing.",
+    "prevention_advice": "Always make sure an integer divisor cannot be zero before performing integer division.",
+    "related_concepts": ["Arithmetic Operators / Division by Zero", "ArithmeticException", "Runtime Exceptions"]
+  },
+  "INCOMPATIBLE_TYPES": {
+    "code": "INCOMPATIBLE_TYPES",
+    "category": "TYPE_ERROR",
+    "title": "Type Mismatch",
+    "beginner_explanation": "You are trying to store a value in a variable whose declared type cannot hold that value. Java is strongly typed, meaning an `int` variable can only hold integers, not text (`String`).",
+    "why_it_happened": "Java enforces strict type safety at compile time. When you assign a String (enclosed in double quotes) to an integer variable, the compiler prevents potential runtime crashes by stopping compilation immediately.",
+    "common_causes": [
+      "Quoting numbers as text (e.g. \"20\" instead of 20)",
+      "Assigning floating point numbers (e.g. 3.14) to integer variables without casting",
+      "Calling a method that returns one type and assigning it to another incompatible type"
+    ],
+    "example_broken": "int age = \"20\";",
+    "example_fixed": "int age = 20;",
+    "suggested_fix": "Change the value to match the variable's type, or parse/convert the value if needed (e.g., `Integer.parseInt(\"20\")`).",
+    "prevention_advice": "Remember: numbers without quotes (20) are integers; text inside quotes (\"20\") is a String. When accepting user text input, parse it explicitly with `Integer.parseInt()` or `Double.parseDouble()`.",
+    "related_concepts": ["Java Primitive Types", "Type Casting", "Type Parsing", "Strong Typing"]
+  },
+  "SEMICOLON_EXPECTED": {
+    "code": "SEMICOLON_EXPECTED",
+    "category": "SYNTAX_ERROR",
+    "title": "Missing Semicolon",
+    "beginner_explanation": "Java statements must always end with a semicolon (`;`). You missed a semicolon at the end of the line or statement.",
+    "why_it_happened": "In Java, semicolons act like periods at the end of sentences. The compiler uses semicolons to know where one command ends and the next begins.",
+    "common_causes": [
+      "Forgetting to add ';' at the end of variable declarations or method calls",
+      "Accidentally typing a colon ':' or comma ',' instead of a semicolon ';'"
+    ],
+    "example_broken": "System.out.println(age)",
+    "example_fixed": "System.out.println(age);",
+    "suggested_fix": "Append a semicolon `;` to the end of the statement.",
+    "prevention_advice": "Get into the habit of ending every variable assignment, method call, and return statement with a semicolon. Statements inside loops and conditionals also need semicolons.",
+    "related_concepts": ["Java Statement Syntax", "Punctuation in Code", "Compiler Tokenization"]
+  },
+  "CANNOT_FIND_SYMBOL_VARIABLE": {
+    "code": "CANNOT_FIND_SYMBOL_VARIABLE",
+    "category": "VARIABLE_ERROR",
+    "title": "Undefined Variable",
+    "beginner_explanation": "Java does not recognize the variable name you referenced. It hasn't been declared, was misspelled, or is outside the current scope.",
+    "why_it_happened": "Before you can read or modify a variable in Java, you must declare it with a type (e.g., `int value = 10;`). Java also cares about case sensitivity (`Value` is different from `value`).",
+    "common_causes": [
+      "Typo in the variable name (e.g., `myVar` vs `myvar`)",
+      "Using the variable before declaring it",
+      "Declaring the variable inside an `if` block or loop (local scope) and trying to access it outside"
+    ],
+    "example_broken": "System.out.println(value);",
+    "example_fixed": "int value = 42;\nSystem.out.println(value);",
+    "suggested_fix": "Declare the variable with its type before using it, or verify that the spelling matches the original declaration.",
+    "prevention_advice": "Always declare variables before using them, double check spelling and capitalization, and check variable scope.",
+    "related_concepts": ["Variable Declaration", "Scope and Lifetime", "Case Sensitivity"]
+  },
+  "CANNOT_FIND_SYMBOL_METHOD": {
+    "code": "CANNOT_FIND_SYMBOL_METHOD",
+    "category": "METHOD_ERROR",
+    "title": "Undefined Method",
+    "beginner_explanation": "Java cannot find the method you are trying to call. The method either doesn't exist, has a typo, or belongs to a different class.",
+    "why_it_happened": "Java verifies every method call against the class definition. If the method name does not match any declared method in the class, compilation halts.",
+    "common_causes": [
+      "Misspelling the method name (e.g. `System.out.printline()` instead of `println()`)",
+      "Calling a method without importing its required package",
+      "Calling an instance method without creating an object instance"
+    ],
+    "example_broken": "System.out.printline(\"Hello\");",
+    "example_fixed": "System.out.println(\"Hello\");",
+    "suggested_fix": "Check the spelling of the method name and verify it exists on the target class or object.",
+    "prevention_advice": "Check the exact documentation for library methods. Method names in Java typically use camelCase.",
+    "related_concepts": ["Method Signatures", "Standard Libraries", "Object Instances"]
+  },
+  "CANNOT_FIND_SYMBOL_CLASS": {
+    "code": "CANNOT_FIND_SYMBOL_CLASS",
+    "category": "CLASS_ERROR",
+    "title": "Undefined Class or Missing Import",
+    "beginner_explanation": "The compiler cannot find the class you referenced. You likely need to import the class from a package.",
+    "why_it_happened": "Java only automatically imports classes from `java.lang`. Classes like `Scanner`, `ArrayList`, or `List` must be explicitly imported from `java.util`.",
+    "common_causes": [
+      "Missing `import java.util.Scanner;` or other package imports",
+      "Typo in class name (e.g., `Scaner` instead of `Scanner`)"
+    ],
+    "example_broken": "Scanner sc = new Scanner(System.in);",
+    "example_fixed": "import java.util.Scanner;\n\nScanner sc = new Scanner(System.in);",
+    "suggested_fix": "Add the appropriate `import` statement at the top of your Java file.",
+    "prevention_advice": "Whenever using utility classes like `Scanner`, `List`, `ArrayList`, or `HashMap`, add their import statement at the top of your file.",
+    "related_concepts": ["Java Packages", "Import Statements", "Classpaths"]
+  },
+  "METHOD_SIGNATURE_MISMATCH": {
+    "code": "METHOD_SIGNATURE_MISMATCH",
+    "category": "METHOD_ERROR",
+    "title": "Wrong Method Arguments",
+    "beginner_explanation": "You called a method with the wrong number or wrong types of arguments.",
+    "why_it_happened": "Java methods require parameters that exactly match the method declaration. Passing the wrong type or number of arguments will cause the compiler to reject the call.",
+    "common_causes": [
+      "Passing too many or too few arguments",
+      "Passing arguments in the wrong order",
+      "Passing a String when a number or boolean was expected"
+    ],
+    "example_broken": "Math.max(10);",
+    "example_fixed": "Math.max(10, 20);",
+    "suggested_fix": "Provide the arguments matching the method's expected parameter types and count.",
+    "prevention_advice": "Check the method definition or documentation to see what arguments it expects.",
+    "related_concepts": ["Method Overloading", "Parameters and Arguments", "Signature Matching"]
+  },
+  "VARIABLE_NOT_INITIALIZED": {
+    "code": "VARIABLE_NOT_INITIALIZED",
+    "category": "VARIABLE_ERROR",
+    "title": "Variable Might Not Have Been Initialized",
+    "beginner_explanation": "You are trying to use a local variable before giving it a starting value.",
+    "why_it_happened": "Unlike instance fields which get default values (like 0 or null), local variables declared inside methods do not have default values. Java requires them to be assigned before they are read.",
+    "common_causes": [
+      "Declaring `int x;` and using `x` without writing `x = 5;` first",
+      "Assigning the variable only inside an `if` block that might not execute"
+    ],
+    "example_broken": "int count;\nSystem.out.println(count);",
+    "example_fixed": "int count = 0;\nSystem.out.println(count);",
+    "suggested_fix": "Initialize the variable with a default value (e.g. `0`, `\"\"`, or `null`) when declaring it.",
+    "prevention_advice": "Initialize local variables when you declare them: `int total = 0;`.",
+    "related_concepts": ["Definite Assignment", "Local Variables vs Instance Variables", "Default Values"]
+  },
+  "MISSING_RETURN_STATEMENT": {
+    "code": "MISSING_RETURN_STATEMENT",
+    "category": "METHOD_ERROR",
+    "title": "Missing Return Statement",
+    "beginner_explanation": "Your method specifies a return type other than `void`, but reaches the end without returning a value.",
+    "why_it_happened": "Every execution path in a non-void method must end with a valid `return` statement that produces a value of the declared type.",
+    "common_causes": [
+      "Having `return` inside an `if` branch but not in the corresponding `else` branch",
+      "Declaring `int myMethod()` instead of `void myMethod()`"
+    ],
+    "example_broken": "public static int add(int a, int b) {\n    int sum = a + b;\n}",
+    "example_fixed": "public static int add(int a, int b) {\n    int sum = a + b;\n    return sum;\n}",
+    "suggested_fix": "Add a `return` statement returning the expected type, or change the return type to `void` if the method shouldn't return anything.",
+    "prevention_advice": "Ensure all code branches (including `else` statements and after loops) return a value.",
+    "related_concepts": ["Return Types", "Control Flow", "Void Methods"]
+  },
+  "STATIC_CONTEXT_ERROR": {
+    "code": "STATIC_CONTEXT_ERROR",
+    "category": "METHOD_ERROR",
+    "title": "Non-Static Member Referenced From Static Context",
+    "beginner_explanation": "You tried to access a normal instance variable or method directly from a `static` method like `main` without creating an object first.",
+    "why_it_happened": "`static` methods belong to the class itself, not to any individual object instance. They cannot access non-static members because there is no specific object instance (`this`) attached.",
+    "common_causes": [
+      "Calling a helper method from `main` without declaring the helper method as `static`",
+      "Accessing a class field inside `main` that wasn't declared `static`"
+    ],
+    "example_broken": "public class Main {\n    int score = 100;\n    public static void main(String[] args) {\n        System.out.println(score);\n    }\n}",
+    "example_fixed": "public class Main {\n    static int score = 100;\n    public static void main(String[] args) {\n        System.out.println(score);\n    }\n}",
+    "suggested_fix": "Make the member `static`, or create an instance of the class (e.g. `Main obj = new Main(); obj.score`).",
+    "prevention_advice": "When writing small standalone programs with `main`, declare helper methods and variables as `static` unless modeling objects.",
+    "related_concepts": ["Static vs Instance", "Object Lifecycle", "Main Method"]
+  },
+  "LOSSY_CONVERSION": {
+    "code": "LOSSY_CONVERSION",
+    "category": "TYPE_ERROR",
+    "title": "Possible Lossy Conversion",
+    "beginner_explanation": "You are assigning a larger data type (like `double` or `long`) to a smaller data type (like `int` or `float`), which could lose data (like decimal places).",
+    "why_it_happened": "Java protects you from unintentionally losing precision. Converting `3.99` to an `int` would truncate the `.99`, so Java requires an explicit cast.",
+    "common_causes": [
+      "Assigning a decimal number (`double`) to an `int` variable",
+      "Assigning a `long` to an `int` without casting"
+    ],
+    "example_broken": "int price = 19.99;",
+    "example_fixed": "double price = 19.99;\n// Or with cast if truncation is intended:\nint price = (int) 19.99;",
+    "suggested_fix": "Change the variable type to `double`, or explicitly cast the value using `(int)`.",
+    "prevention_advice": "Use `double` for values with decimal points and `int` for whole numbers.",
+    "related_concepts": ["Widening vs Narrowing Conversion", "Floating Point Precision", "Type Casting"]
+  },
+  "PARENTHESIS_EXPECTED": {
+    "code": "PARENTHESIS_EXPECTED",
+    "category": "SYNTAX_ERROR",
+    "title": "Unmatched Parenthesis",
+    "beginner_explanation": "You opened a parenthesis `(` without closing it `)`, or closed one without opening it.",
+    "why_it_happened": "All parentheses in Java expressions and method parameter lists must be paired symmetrically.",
+    "common_causes": [
+      "Missing `)` at the end of a method call or `if` condition",
+      "Extra `)` accidentally typed in an arithmetic expression"
+    ],
+    "example_broken": "if (x > 10 {\n    System.out.println(x);\n}",
+    "example_fixed": "if (x > 10) {\n    System.out.println(x);\n}",
+    "suggested_fix": "Ensure every opening `(` has a matching closing `)`.",
+    "prevention_advice": "Most modern editors auto-close parentheses. Count your opening and closing parentheses when you see this error.",
+    "related_concepts": ["Syntax Tree", "Parenthesized Expressions", "Conditionals"]
+  },
+  "BRACE_EXPECTED": {
+    "code": "BRACE_EXPECTED",
+    "category": "SYNTAX_ERROR",
+    "title": "Unmatched Curly Brace",
+    "beginner_explanation": "You missed a closing curly brace `}` or opening curly brace `{` for a class, method, or loop.",
+    "why_it_happened": "Curly braces define code blocks in Java. A missing brace makes the compiler think the class or method continues indefinitely.",
+    "common_causes": [
+      "Missing `}` at the end of the class or `main` method",
+      "Accidental deletion of a brace while editing code"
+    ],
+    "example_broken": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hi\");\n    \n}",
+    "example_fixed": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hi\");\n    }\n}",
+    "suggested_fix": "Add the missing closing brace `}` at the appropriate block boundary.",
+    "prevention_advice": "Keep your code properly indented. If indentation drifts right without returning left, you are likely missing a closing brace.",
+    "related_concepts": ["Code Blocks", "Scope", "Code Formatting"]
+  }
+}

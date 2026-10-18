@@ -1,0 +1,38 @@
+services:
+  # Backend API Service (Docker with Python 3.12 + OpenJDK 17)
+  # Automatically deployed to https://codesense-api.onrender.com
+  - type: web
+    name: codesense-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    region: oregon
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: DATABASE_URL
+        value: sqlite:///./codesense.db
+      - key: AI_API_KEY
+        sync: false
+      - key: AI_MODEL
+        value: gemini-2.5-flash
+      - key: FRONTEND_URL
+        value: https://codesense.vercel.app
+      - key: COMPILATION_TIMEOUT_SECONDS
+        value: "10"
+      - key: BACKEND_PORT
+        value: "8000"
+
+  # Frontend Static Site (React + Vite SPA)
+  - type: static
+    name: codesense-frontend
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
