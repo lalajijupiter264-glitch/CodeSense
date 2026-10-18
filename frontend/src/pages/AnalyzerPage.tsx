@@ -99,6 +99,7 @@ export const AnalyzerPage = () => {
   const handleAnalyze = async () => {
     setLoading(true);
     setApiError(null);
+    setAnalysis(null);
     setStatusText('Compiling via javac...');
     try {
       const result = await analyzeCode(code);
@@ -122,6 +123,8 @@ export const AnalyzerPage = () => {
 
   const handleCompileOnly = async () => {
     setLoading(true);
+    setApiError(null);
+    setAnalysis(null);
     setStatusText('Compiling...');
     try {
       const comp = await compileCodeOnly(code);

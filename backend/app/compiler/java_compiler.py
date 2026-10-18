@@ -100,6 +100,7 @@ class JavaCompilerService(CompilerService):
                 "-J-XX:TieredStopAtLevel=1",
                 "-J-Xmx128m",
                 "-J-XX:+UseSerialGC",
+                "-Xlint:divzero",
                 "-encoding", "UTF-8",
                 target_file_name
             ]
@@ -108,6 +109,7 @@ class JavaCompilerService(CompilerService):
             process = subprocess.run(
                 cmd,
                 cwd=temp_dir,
+                stdin=subprocess.DEVNULL,
                 capture_output=True,
                 text=True,
                 timeout=self.timeout_seconds
