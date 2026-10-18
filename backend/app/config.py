@@ -35,7 +35,7 @@ class Settings(BaseSettings):
 
     # Java Compiler
     java_compiler_path: str = "javac"
-    compilation_timeout_seconds: int = 10
+    compilation_timeout_seconds: int = 25
 
 
 settings = Settings()

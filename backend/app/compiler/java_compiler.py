@@ -96,7 +96,10 @@ class JavaCompilerService(CompilerService):
 
             cmd = [
                 self.compiler_path,
-                "-Xlint:all",
+                "-J-XX:+TieredCompilation",
+                "-J-XX:TieredStopAtLevel=1",
+                "-J-Xmx128m",
+                "-J-XX:+UseSerialGC",
                 "-encoding", "UTF-8",
                 target_file_name
             ]

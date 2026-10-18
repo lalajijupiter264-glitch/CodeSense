@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   AlertTriangle,
   AlertCircle,
@@ -30,6 +30,12 @@ export const AnalysisPanel = ({
   onApplyFix,
 }: AnalysisPanelProps) => {
   const [activeTab, setActiveTab] = useState<'errors' | 'explanation' | 'warnings'>('errors');
+
+  useEffect(() => {
+    if (analysis && analysis.errors.length > 0) {
+      setActiveTab('errors');
+    }
+  }, [analysis]);
 
   if (loading) {
     return (
@@ -224,6 +230,12 @@ export const AnalysisPanel = ({
         {/* TAB 1: ERRORS LIST */}
         {activeTab === 'errors' && (
           <div className="space-y-4">
+            {analysis.errors.length === 0 && analysis.raw_output && (
+              <div className="p-4 rounded-xl bg-red-950/20 border border-red-500/20 text-xs text-red-300 font-mono whitespace-pre-wrap">
+                <span className="font-bold text-red-400 block mb-1">Compiler Output:</span>
+                {analysis.raw_output}
+              </div>
+            )}
             {analysis.errors.map((detail, idx) => (
               <ErrorCard
                 key={detail.error.id || idx}

@@ -20,7 +20,7 @@ services:
       - key: FRONTEND_URL
         value: https://codesense.vercel.app
       - key: COMPILATION_TIMEOUT_SECONDS
-        value: "10"
+        value: "25"
       - key: BACKEND_PORT
         value: "8000"
 

@@ -73,6 +73,20 @@ def analyze_code(req: AnalyzeRequest, db: Session = Depends(get_db)):
     # 2. Parse errors
     parsed_errors = error_parser.parse(comp_result.stderr)
 
+    # Fallback: If compilation failed or timed out but no standard diagnostics were parsed
+    if not comp_result.success and not parsed_errors:
+        synthesized_msg = comp_result.stderr.strip() or comp_result.error_message or "Compilation process failed."
+        timeout_code = "COMPILATION_TIMEOUT" if comp_result.exit_code == -2 else "COMPILATION_FAILED"
+        from app.compiler.error_parser import ParsedCompilerError
+        parsed_errors.append(ParsedCompilerError(
+            line=1,
+            column=1,
+            severity="error",
+            message=synthesized_msg,
+            compiler_code=timeout_code,
+            problematic_line=""
+        ))
+
     # 3. Classify & Explain each compiler error
     error_details: List[ErrorDetail] = []
     for err in parsed_errors:
